@@ -1,7 +1,6 @@
 <x-layout>
     <x-slot:heading>
-        Home Page
+        Contact Us
     </x-slot:heading>
-
-    <h1>Gid Gud</h1>
+    <h1>Gid Gud - Contact</h1>
 </x-layout>
