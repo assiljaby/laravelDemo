@@ -2,39 +2,10 @@
 
 namespace App\Models;
 
-use phpDocumentor\Reflection\Types\Static_;
+use Illuminate\Database\Eloquent\Model;
 
-class Job
+class Job extends Model
 {
-    public static function all(): array
-    {
-        return [
-            [
-                'id' => 1,
-                'title' => 'Director',
-                'salary' => '$50,000'
-            ],
-            [
-                'id' => 2,
-                'title' => 'Programmer',
-                'salary' => '$10,000'
-            ],
-            [
-                'id' => 3,
-                'title' => 'Teacher',
-                'salary' => '$40,000'
-            ]
-        ];
-    }
-
-    public static function find(int $id): array {
-
-        $job = \Illuminate\Support\Arr::first(static::all(), fn($job) => $job['id'] == $id);
-
-        if (!$job) {
-            abort(404, 'Job not found');
-        }
-
-        return $job;
-    }
+        protected $table = 'jobs_listing';
+        protected $fillable = ['title', 'salary'];
 }
