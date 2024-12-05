@@ -26,6 +26,13 @@ Route::get('/job/{id}', function ($id) {
     ]);
 });
 
+Route::get('/job/{id}/edit', function ($id) {
+    $job = Job::find($id);
+    return view('jobs.edit', [
+        'job' => $job
+    ]);
+});
+
 Route::post('/jobs', function () {
     request()->validate([
         'title' => ['required', 'min:3'],
