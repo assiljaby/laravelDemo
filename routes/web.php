@@ -47,6 +47,28 @@ Route::post('/jobs', function () {
    return redirect('/jobs');
 });
 
+Route::patch('/job/{id}', function ($id) {
+    request()->validate([
+        'title' => ['required', 'min:3'],
+        'salary' => ['required']
+    ]);
+
+    $job = Job::findOrFail($id);
+
+    $job->update([
+        'title' => request('title'),
+        'salary' => request('salary')
+    ]);
+
+    return redirect("/job/{$job->id}");
+});
+
+Route::delete('job/{id}', function ($id) {
+    Job::findOrFail($id)->delete();
+
+    return redirect('/jobs');
+});
+
 Route::get('/contact', function () {
     return view('contact');
 });
