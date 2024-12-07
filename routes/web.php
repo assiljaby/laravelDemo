@@ -12,8 +12,12 @@ Route::view('/contact', 'contact');
 Route::controller(JobController::class)->group(function () {
     Route::get('/jobs', 'index');
     Route::get('/jobs/create', 'create');
-    Route::get('/job/{job}', 'show');
-    Route::get('/job/{job}/edit', 'edit');
+    Route::get('/job/{job}', 'show')->middleware('auth');
+
+    Route::get('/job/{job}/edit', 'edit')
+        ->middleware('auth')
+        ->can('edit', 'job');
+
     Route::post('/jobs', 'store');
     Route::patch('/job/{job}','update');
     Route::delete('job/{job}', 'destroy');
@@ -23,6 +27,6 @@ Route::controller(JobController::class)->group(function () {
 Route::get('/register', [RegisteredUserController::class, 'create']);
 Route::post('/register', [RegisteredUserController::class, 'store']);
 
-Route::get('/login', [SessionController::class, 'create']);
+Route::get('/login', [SessionController::class, 'create'])->name('login');
 Route::post('/login', [SessionController::class, 'store']);
 Route::post('/logout', [SessionController::class, 'destroy']);
